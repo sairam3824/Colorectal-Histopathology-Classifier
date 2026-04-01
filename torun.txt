@@ -1,9 +1,17 @@
+### For Mac/Linux:
 python3.11 -m venv colon_cancer
 source colon_cancer/bin/activate
 pip install -r requirements.txt
 python app.py
 
+### For Windows:
+python -m venv colon_cancer
+.\colon_cancer\Scripts\activate
+pip install -r requirements.txt
+python app.py
+
+### Using Conda (All OS):
 conda create -n colon_cancer python=3.11
 conda activate colon_cancer
 pip install -r requirements.txt
-python app.py# doc 7
+python app.py
