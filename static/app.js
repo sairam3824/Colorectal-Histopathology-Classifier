@@ -129,3 +129,4 @@ dropzone.addEventListener("drop", (event) => {
 });
 
 form.addEventListener("submit", submitPrediction);
+// ver 2
