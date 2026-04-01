@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorectal Histology Classifier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Clinical AI Demo</p>
+          <h1>Colorectal Histology Classification with Grad-CAM Insight</h1>
+          <p class="hero-text">
+            Upload a histopathology image to run the saved CNN model, review the
+            predicted tissue class, and inspect the region most responsible for
+            that decision.
+          </p>
+          <div class="hero-meta">
+            <span>Model input: {{ target_width }} x {{ target_height }}</span>
+            <span>{{ class_names | length }} tissue classes</span>
+            <span>Grad-CAM enabled</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <p class="panel-title">Supported Classes</p>
+          <div class="tag-grid">
+            {% for class_name in class_names %}
+            <span class="tag">{{ class_name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <section class="card upload-card">
+          <div class="section-heading">
+            <p class="section-kicker">Step 1</p>
+            <h2>Upload Histology Image</h2>
+          </div>
+
+          <form id="prediction-form" class="upload-form">
+            <label class="dropzone" for="image-input" id="dropzone">
+              <input id="image-input" name="image" type="file" accept="image/*" required />
+              <span class="dropzone-title">Drag and drop an image here</span>
+              <span class="dropzone-subtitle">or click to browse from your device</span>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" id="analyze-button">Analyze Image</button>
+              <p id="status-text" class="status-text">Waiting for an image.</p>
+            </div>
+          </form>
+
+          <div class="preview-wrap">
+            <div class="image-panel">
+              <div class="image-panel-header">
+                <h3>Original Image</h3>
+              </div>
+              <img id="original-preview" alt="Uploaded preview" />
+              <p id="file-name" class="muted">No image selected.</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="card info-card">
+          <div class="section-heading">
+            <p class="section-kicker">Workflow</p>
+            <h2>What happens after upload</h2>
+          </div>
+          <ol class="workflow-list">
+            <li>The image is resized to the saved model's expected input size.</li>
+            <li>The CNN predicts one of the colorectal histology tissue classes.</li>
+            <li>Grad-CAM highlights the most influential image regions.</li>
+            <li>The app returns the prediction, confidence, and heatmap overlay.</li>
+          </ol>
+          <p class="disclaimer">
+            This interface is for project demonstration and research use. It is
+            not a substitute for clinical judgment or pathology review.
+          </p>
+        </aside>
+      </main>
+
+      <section id="results-section" class="results-shell hidden">
+        <div class="card results-card">
+          <div class="section-heading">
+            <p class="section-kicker">Step 2</p>
+            <h2>Prediction Summary</h2>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-metric">
+              <p class="metric-label">Predicted Class</p>
+              <h3 id="predicted-label">-</h3>
+              <p id="prediction-description" class="metric-note"></p>
+            </div>
+            <div class="summary-metric">
+              <p class="metric-label">Confidence</p>
+              <h3 id="prediction-confidence">-</h3>
+              <p class="metric-note">Softmax probability for the predicted class.</p>
+            </div>
+            <div class="summary-metric">
+              <p class="metric-label">Last Conv Layer</p>
+              <h3 id="last-conv-layer">-</h3>
+              <p class="metric-note">Layer used to generate the Grad-CAM heatmap.</p>
+            </div>
+          </div>
+
+          <div class="top-predictions">
+            <div class="image-panel-header">
+              <h3>Top Predictions</h3>
+            </div>
+            <div id="prediction-bars" class="prediction-bars"></div>
+          </div>
+        </div>
+
+        <div class="card gradcam-card">
+          <div class="section-heading">
+            <p class="section-kicker">Step 3</p>
+            <h2>Grad-CAM Visualization</h2>
+          </div>
+          <div class="image-grid">
+            <div class="image-panel">
+              <div class="image-panel-header">
+                <h3>Original</h3>
+              </div>
+              <img id="result-original-image" alt="Original uploaded image" />
+            </div>
+            <div class="image-panel">
+              <div class="image-panel-header">
+                <h3>Heatmap Overlay</h3>
+              </div>
+              <img id="gradcam-image" alt="Grad-CAM overlay" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

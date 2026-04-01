@@ -1,0 +1,67 @@
+{
+  "classes": {
+    "tumor": {
+      "precision": 0.97,
+      "recall": 0.96,
+      "f1-score": 0.97,
+      "support": 112
+    },
+    "stroma": {
+      "precision": 0.92,
+      "recall": 0.88,
+      "f1-score": 0.90,
+      "support": 127
+    },
+    "complex": {
+      "precision": 0.89,
+      "recall": 0.89,
+      "f1-score": 0.89,
+      "support": 137
+    },
+    "lympho": {
+      "precision": 0.95,
+      "recall": 0.98,
+      "f1-score": 0.97,
+      "support": 126
+    },
+    "debris": {
+      "precision": 0.94,
+      "recall": 0.96,
+      "f1-score": 0.95,
+      "support": 126
+    },
+    "mucosa": {
+      "precision": 1.00,
+      "recall": 0.98,
+      "f1-score": 0.99,
+      "support": 128
+    },
+    "adipose": {
+      "precision": 0.99,
+      "recall": 0.96,
+      "f1-score": 0.97,
+      "support": 118
+    },
+    "empty": {
+      "precision": 0.96,
+      "recall": 1.00,
+      "f1-score": 0.98,
+      "support": 126
+    }
+  },
+  "overall": {
+    "accuracy": 0.95,
+    "macro_avg": {
+      "precision": 0.95,
+      "recall": 0.95,
+      "f1-score": 0.95,
+      "support": 1000
+    },
+    "weighted_avg": {
+      "precision": 0.95,
+      "recall": 0.95,
+      "f1-score": 0.95,
+      "support": 1000
+    }
+  }
+}
