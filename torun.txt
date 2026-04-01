@@ -6,4 +6,4 @@ python app.py
 conda create -n colon_cancer python=3.11
 conda activate colon_cancer
 pip install -r requirements.txt
-python app.py
+python app.py# doc 7
