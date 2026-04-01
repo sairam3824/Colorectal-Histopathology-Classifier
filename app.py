@@ -183,9 +183,29 @@ def serialize_original_image(image: Image.Image) -> str:
 
 
 @app.get("/")
-def index():
+def home():
     return render_template(
-        "index.html",
+        "home.html",
+        class_names=CLASS_NAMES,
+        target_width=TARGET_SIZE[1],
+        target_height=TARGET_SIZE[0],
+    )
+
+
+@app.get("/analysis")
+def analysis_page():
+    return render_template(
+        "analysis.html",
+        class_names=CLASS_NAMES,
+        target_width=TARGET_SIZE[1],
+        target_height=TARGET_SIZE[0],
+    )
+
+
+@app.get("/history")
+def history_page():
+    return render_template(
+        "history.html",
         class_names=CLASS_NAMES,
         target_width=TARGET_SIZE[1],
         target_height=TARGET_SIZE[0],
