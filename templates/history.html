@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorectal Histology Classifier | History</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="top-nav">
+        <p class="brand">Histology AI Lab</p>
+        <div class="nav-links">
+          <a class="button-link button-link-soft" href="{{ url_for('home') }}">Home</a>
+          <a class="button-link button-link-soft" href="{{ url_for('analysis_page') }}">Analysis</a>
+        </div>
+      </header>
+
+      <section class="hero hero-home">
+        <div class="hero-copy">
+          <p class="eyebrow">Prediction History</p>
+          <h1>Past Analysis Results</h1>
+          <p class="hero-text">
+            Review prior predictions made in this browser. Each run stores predicted
+            class, confidence, and top predictions.
+          </p>
+          <div class="hero-meta">
+            <span>Stored in browser local storage</span>
+            <span>Latest entries shown first</span>
+            <span>Local to this device</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <p class="panel-title">Quick Actions</p>
+          <div class="history-actions">
+            <a class="button-link" href="{{ url_for('analysis_page') }}">Run New Analysis</a>
+            <button id="clear-history-button" type="button">Clear History</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card history-card">
+        <div class="section-heading">
+          <p class="section-kicker">Timeline</p>
+          <h2>Saved Predictions</h2>
+        </div>
+        <p id="history-empty" class="disclaimer hidden">
+          No history found yet. Run an analysis from the Analysis page to populate this view.
+        </p>
+        <div id="history-list" class="history-list"></div>
+      </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

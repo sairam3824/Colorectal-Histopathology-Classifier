@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorectal Histology Classifier | Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="top-nav">
+        <p class="brand">Histology AI Lab</p>
+        <div class="nav-links">
+          <a class="button-link button-link-soft" href="{{ url_for('analysis_page') }}">Analysis</a>
+          <a class="button-link button-link-soft" href="{{ url_for('history_page') }}">History</a>
+        </div>
+      </header>
+
+      <main class="home-grid">
+        <section class="hero hero-home">
+          <div class="hero-copy">
+            <p class="eyebrow">Project Home</p>
+            <h1>Colorectal Histopathology Classifier</h1>
+            <p class="hero-text">
+              This web app predicts colorectal tissue classes from histology images
+              and visualizes model focus using Grad-CAM overlays.
+            </p>
+            <div class="hero-meta">
+              <span>Model input: {{ target_width }} x {{ target_height }}</span>
+              <span>{{ class_names | length }} tissue classes</span>
+              <span>CNN + Grad-CAM</span>
+            </div>
+            <div class="home-actions">
+              <a class="button-link" href="{{ url_for('analysis_page') }}">Start Analysis</a>
+              <a class="button-link button-link-soft" href="{{ url_for('history_page') }}">View History</a>
+            </div>
+          </div>
+          <div class="hero-panel">
+            <p class="panel-title">Supported Classes</p>
+            <div class="tag-grid">
+              {% for class_name in class_names %}
+              <span class="tag">{{ class_name }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-heading">
+            <p class="section-kicker">How It Works</p>
+            <h2>Analysis in 3 Steps</h2>
+          </div>
+          <ol class="workflow-list">
+            <li>Upload a histology image tile to the analysis page.</li>
+            <li>Run model inference to get predicted class and confidence.</li>
+            <li>Inspect Grad-CAM heatmap overlay for interpretability.</li>
+          </ol>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
